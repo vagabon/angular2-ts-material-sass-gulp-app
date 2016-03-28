@@ -18,4 +18,5 @@ lib
 test
 tools/typings/tsd
 tmp
+.bat
 *.bat
