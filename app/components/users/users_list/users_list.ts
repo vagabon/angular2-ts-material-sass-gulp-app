@@ -1,10 +1,8 @@
-import {Component, ElementRef} from 'angular2/core';
-import {MdDialog} from "ng2-material/all";
-import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
+import {Component} from 'angular2/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {UserService} from '../services/user_service';
-import {DialogDirective, Logger} from '../../../engine/all';
+import {ConfirmDirective, Logger} from '../../../engine/all';
 
 const MIN = 0;
 const SHOW = 2;
@@ -12,18 +10,15 @@ const SHOW = 2;
 @Component({
   selector: 'users-list',
   templateUrl: 'dist/components/users/users_list/users_list.html',
-  providers: [MdDialog, ElementRef, UserService]
+  providers: [UserService]
 })
 export class UsersListCmp {
 
   loading;
-  dialog: DialogDirective;
   min = 0;
   users = [];
 
-  constructor(private translate: TranslateService, private urlService:UserService,
-              private mdDialog: MdDialog, private element: ElementRef) {
-    this.dialog = new DialogDirective(mdDialog, element, translate);
+  constructor(private translate: TranslateService, private urlService:UserService) {
     this.min = MIN;
   }
 
@@ -68,13 +63,10 @@ export class UsersListCmp {
   }
 
   delete(userId) {
-    this.dialog.confirm("USER.DELETE").subscribe(()=> {
-      Logger.log("plouffff");
-      this.urlService.delete(userId).subscribe(data => {
-            this.show(true, 0, this.min + SHOW);
-          }
-      );
-    });
+    this.urlService.delete(userId).subscribe(data => {
+          this.show(true, 0, this.min + SHOW);
+        }
+    );
   }
 
 }

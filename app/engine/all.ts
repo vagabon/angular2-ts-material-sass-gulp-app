@@ -12,7 +12,8 @@ export {UrlService}         from './services/url_service'
 export {ImagePipe}          from './pipes/image_pipe'
 
 /****************** DIRECTIVES / COMPONENTS AS DIRECTIVES *******************************/
-export {DialogDirective}    from './directives/dialog_directive'
+export {AlertDirective}     from './directives/alert_directive'
+export {ConfirmDirective}    from './directives/confirm_directive'
 export {InfoDirective}      from './directives/info_directive'
 export {SearchBarDirective} from './directives/search_bar_directive'
 

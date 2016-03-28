@@ -3,7 +3,9 @@
     <md-card>
         <md-card-title class="noFlex">
             <md-card-title-media>
-                <img src="{{ 'ABOUT.IMG' | translate }}" class="card-media md-media-lg" alt="Grass" (click)="stop()">
+                <alert [text]="interval == null ? 'ABOUT.PROGRESSBARSTOP' : 'ABOUT.PROGRESSBARSTART'" (event)="stop()">
+                    <img src="{{ 'ABOUT.IMG' | translate }}" class="card-media md-media-lg" alt="Grass">
+                </alert>
             </md-card-title-media>
             <md-card-title-text>
                 <span class="md-headline">{{ 'ABOUT.TITLE' | translate }}</span>

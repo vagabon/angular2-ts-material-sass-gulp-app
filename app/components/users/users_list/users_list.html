@@ -22,9 +22,12 @@
           <h3>{{ user.username }}</h3>
           <p>{{ user.email }}</p>
         </div>
-        <button md-raised-button class="md-raised md-icon-button" (click)="delete(user.id)" style="margin-top: 20px !important; color: #fc4b4b;">
-          <i md-icon>delete</i>
-        </button>
+
+        <confirm (event)="delete(user.id)" text="USER.DELETE">
+          <button md-raised-button class="md-raised md-icon-button" style="margin-top: 20px !important; color: #fc4b4b;">
+            <i md-icon>delete</i>
+          </button>
+        </confirm>
         <md-divider inset></md-divider>
       </md-list-item>
       <md-progress-circular mode="indeterminate" *ngIf="loading"></md-progress-circular>

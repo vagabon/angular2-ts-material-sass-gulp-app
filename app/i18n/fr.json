@@ -6,7 +6,8 @@
   "REQUIRED": "is required !",
 
   "DIALOG": {
-    "CONFIRM": { "TITLE": "Confirm", "YES": "Yes", "NO": "No"}
+    "ALERT": { "TITLE": "Alert", "OK": "Ok" },
+    "CONFIRM": { "TITLE": "Confirm", "YES": "Yes", "NO": "No" }
   },
 
   "HOME": {
@@ -26,6 +27,8 @@
     "URL" : "https://github.com/vagabon",
     "TEXT" : "This is a Web application made with Angular 2 and Material design with a progress bar that cannot be stopped !",
     "REWINDS": "All the rewinds are for : ",
+    "PROGRESSBARSTOP": "This progress bar cannot be stopped i said !!!",
+    "PROGRESSBARSTART": "Congratz you stop the progress bar !",
     "CARD0" : { "URL": "https://angular.io/docs/ts/latest/", "IMG": "http://blog.soat.fr/wp-content/uploads/2015/11/A_2.0.png", "CONTENT": "Angular 2" },
     "CARD1" : { "URL": "https://nodejs.org/en/", "IMG": "http://cdn.ttgtmedia.com/rms/LeMagIT/images/nodejs-logo.png", "CONTENT": "Node JS" },
     "CARD2" : { "URL": "https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md", "IMG": "https://avatars0.githubusercontent.com/u/6200624?v=3&s=400", "CONTENT": "Gulp" },

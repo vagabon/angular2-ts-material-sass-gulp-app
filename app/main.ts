@@ -9,7 +9,7 @@ import {TRANSLATE_PROVIDERS, TranslateService, TranslatePipe, TranslateLoader, T
 import {SidenavService} from "ng2-material/components/sidenav/sidenav_service";
 import {Media} from "ng2-material/core/util/media";
 
-import {BaseApp, ImagePipe, SearchBarDirective, InfoDirective} from './engine/all';
+import {BaseApp, SearchBarDirective, InfoDirective, AlertDirective, ConfirmDirective, ImagePipe} from './engine/all';
 import {Settings} from './settings';
 
 import {HomeCmp} from './components/home/home';
@@ -49,7 +49,9 @@ bootstrap(<any>AppCmp, [ROUTER_PROVIDERS, provide(LocationStrategy, { useClass: 
   provide(PLATFORM_DIRECTIVES, {useValue: MATERIAL_DIRECTIVES, multi: true}),
   provide(PLATFORM_DIRECTIVES, {useValue: RouterLink, multi: true}),
   provide(PLATFORM_DIRECTIVES, {useValue: InfoDirective, multi: true}),
+  provide(PLATFORM_DIRECTIVES, {useValue: ConfirmDirective, multi: true}),
   provide(PLATFORM_DIRECTIVES, {useValue: SearchBarDirective, multi: true}),
+  provide(PLATFORM_DIRECTIVES, {useValue: AlertDirective, multi: true}),
   provide(PLATFORM_PIPES, {useValue: TranslatePipe, multi: true}),
   provide(PLATFORM_PIPES, {useValue: ImagePipe, multi: true})
 ]);
