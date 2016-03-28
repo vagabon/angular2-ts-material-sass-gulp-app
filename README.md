@@ -5,7 +5,7 @@
 
 This is an Web Application made With Angular2, Typescript, Sass, Gilp and Materialize with Internationalization.
 
-Live DEMO here: [Demo]http://vagabond.synology.me:81/sample-angular2/#/home
+Live [Demo](http://vagabond.synology.me:81/sample-angular2/#/home)
 
 ## Install
 
