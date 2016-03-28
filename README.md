@@ -1,21 +1,25 @@
 # Angular2 TypeScript Sass Gulp
 
 
-npm install
+## Purpose 
 
+This is an Web Application made With Angular2, Typescript, Sass, Gilp and Materialize with Internationalization.
 
-https://design.google.com/icons/
+Live DEMO here: [Demo]http://vagabond.synology.me:81/sample-angular2/#/home
 
-Live DEMO here: http://www.syntaxsuccess.com/angular-2-samples
-Documentation: http://www.syntaxsuccess.com/viewarticle/angular-2.0-examples
+## Install
 
-Here are the prerequisites for running the project:
+ * Install [NodeJS](https://nodejs.org/en/)
+ * npm install
+ * gulp serve (or gulp serve-urlprod if you want to use the URL of my [Srping Boot Rest Server](http://vagabond.synology.me:8080/)
+ 
+## Documentation
 
-1-npm install -g typescript
+ * Angular 2 : https://angular.io/docs/ts/latest/
+ * ng2-material : https://github.com/justindujardin/ng2-material
+ * ng2-material icons : https://design.google.com/icons/
+ * ng2-translate : https://github.com/ocombe/ng2-translate
 
-2-npm install
-
-3-bower install
 
 Steps 1-3 will install the required tooling.
 
