@@ -1,14 +1,12 @@
 import {Component, ElementRef} from 'angular2/core';
-import {MATERIAL_DIRECTIVES, MdDialog} from "ng2-material/all";
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {MdDialog} from "ng2-material/all";
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
 
 @Component({
   selector: 'about',
   templateUrl: 'dist/components/about/about.html',
-  providers: [MdDialog],
-  directives: [MATERIAL_DIRECTIVES],
-  pipes: [TranslatePipe]
+  providers: [MdDialog]
 })
 export class AboutCmp {
 

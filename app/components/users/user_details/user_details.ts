@@ -1,18 +1,16 @@
 import {Component, Inject, OnInit} from 'angular2/core';
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {RouteParams, RouterLink} from 'angular2/router';
 import {FORM_DIRECTIVES} from "angular2/common";
 
 import {UserService} from '../services/user_service';
-import {Logger, ImagePipe, InfoDirective, BaseCrud} from '../../../engine/all';
+import {Logger, BaseCrud} from '../../../engine/all';
 
 @Component({
   selector: 'user-details',
   templateUrl: 'dist/components/users/user_details/user_details.html',
-  providers: [UserService],
-  directives: [RouterLink, MATERIAL_DIRECTIVES, InfoDirective],
-  pipes: [TranslatePipe, ImagePipe]
+  providers: [UserService]
 })
 export class UserDetailsCmp extends BaseCrud implements OnInit {
 

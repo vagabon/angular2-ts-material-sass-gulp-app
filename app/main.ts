@@ -1,15 +1,15 @@
 /// <reference path="../node_modules/angular2/typings/browser.d.ts" />
 
-import {Component, enableProdMode, Input, provide, ViewEncapsulation} from 'angular2/core';
+import {Component, enableProdMode, Input, provide, ViewEncapsulation, PLATFORM_PIPES, PLATFORM_DIRECTIVES} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, LocationStrategy, HashLocationStrategy, RouterLink} from 'angular2/router';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 import {TRANSLATE_PROVIDERS, TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {SidenavService} from "ng2-material/components/sidenav/sidenav_service";
 import {Media} from "ng2-material/core/util/media";
 
-import {BaseApp} from './engine/all';
+import {BaseApp, ImagePipe, SearchBarDirective, InfoDirective} from './engine/all';
 import {Settings} from './settings';
 
 import {HomeCmp} from './components/home/home';
@@ -44,4 +44,12 @@ bootstrap(<any>AppCmp, [ROUTER_PROVIDERS, provide(LocationStrategy, { useClass: 
   provide(TranslateLoader, {
     useFactory: (http: Http) => new TranslateStaticLoader(http, 'dist/i18n', '.json'),
     deps: [Http]
-  }), TranslateService]);
+  }),
+  TranslateService,
+  provide(PLATFORM_DIRECTIVES, {useValue: MATERIAL_DIRECTIVES, multi: true}),
+  provide(PLATFORM_DIRECTIVES, {useValue: RouterLink, multi: true}),
+  provide(PLATFORM_DIRECTIVES, {useValue: InfoDirective, multi: true}),
+  provide(PLATFORM_DIRECTIVES, {useValue: SearchBarDirective, multi: true}),
+  provide(PLATFORM_PIPES, {useValue: TranslatePipe, multi: true}),
+  provide(PLATFORM_PIPES, {useValue: ImagePipe, multi: true})
+]);

@@ -1,21 +1,18 @@
 import {Component, ElementRef} from 'angular2/core';
-import {MATERIAL_DIRECTIVES, MdDialog} from "ng2-material/all";
+import {MdDialog} from "ng2-material/all";
 import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
-import {RouterLink} from 'angular2/router';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {UserService} from '../services/user_service';
-import {DialogDirective, Logger, ImagePipe, SearchBarDirective} from '../../../engine/all';
+import {DialogDirective, Logger} from '../../../engine/all';
 
-let MIN = 0;
-let SHOW = 2;
+const MIN = 0;
+const SHOW = 2;
 
 @Component({
   selector: 'users-list',
   templateUrl: 'dist/components/users/users_list/users_list.html',
-  providers: [MdDialog, ElementRef, UserService],
-  directives: [RouterLink, MATERIAL_DIRECTIVES, SearchBarDirective],
-  pipes: [TranslatePipe, ImagePipe]
+  providers: [MdDialog, ElementRef, UserService]
 })
 export class UsersListCmp {
 

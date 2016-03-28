@@ -59,7 +59,7 @@ gulp.task('views', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch([config.listFilesTS],   ['ts-lint', 'compile-ts']);
+    gulp.watch([config.listFilesTS],   ['ts-lint', 'build-ts-dev-urlprod']);
     gulp.watch([config.listFilesSCSS], ['styles']);
     gulp.watch([config.i18nFiles],     ['styles']);
     gulp.watch([config.listFilesHTML], ['views']);
