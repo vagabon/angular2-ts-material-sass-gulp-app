@@ -1,9 +1,9 @@
-# Angular2 TypeScript Sass Gulp
+# Angular2 TypeScript Material Sass Gulp
 
 
 ## Purpose 
 
-This is an Web Application made With Angular2, Typescript, Sass, Gilp and Materialize with Internationalization.
+This is an Web Application made With Angular2, Typescript, Sass, Gilp and Material with Internationalization.
 
 Live [Demo](http://vagabond.synology.me:81/sample-angular2/#/home)
 
