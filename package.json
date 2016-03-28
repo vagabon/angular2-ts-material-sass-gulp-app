@@ -1,5 +1,5 @@
 {
-  "name": "angular2-ts-materialise-sass-gulp-app",
+  "name": "angular2-ts-material-sass-gulp-app",
   "version": "0.0.1",
   "description": "Angular 2 with TypeScript & Sass & Gulp apps",
   "main": "app/index.js",
