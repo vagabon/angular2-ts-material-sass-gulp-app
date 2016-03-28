@@ -19,10 +19,3 @@ Live [Demo](http://vagabond.synology.me:81/sample-angular2/#/home)
  * ng2-material : https://github.com/justindujardin/ng2-material
  * ng2-material icons : https://design.google.com/icons/
  * ng2-translate : https://github.com/ocombe/ng2-translate
-
-
-Steps 1-3 will install the required tooling.
-
-The final step is to launch the site by starting the lite-server
-
-npm run start
