@@ -17,5 +17,6 @@ Live [Demo](http://vagabond.synology.me:81/sample-angular2/#/home)
 
  * Angular 2 : https://angular.io/docs/ts/latest/
  * ng2-material : https://github.com/justindujardin/ng2-material
+ * ng2-material examples : https://justindujardin.github.io/ng2-material/
  * ng2-material icons : https://design.google.com/icons/
  * ng2-translate : https://github.com/ocombe/ng2-translate
