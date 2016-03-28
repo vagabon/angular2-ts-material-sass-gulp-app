@@ -1,0 +1,25 @@
+<!--suppress XmlUnboundNsPrefix -->
+<md-sidenav-container layout="row" flex>
+    <section class="app-content" layout="column" layout-align="start center" flex (window:scroll)="onScroll($event)">
+        <md-toolbar class="toolbar">
+            <h1>{{ 'TITLE' | translate }}</h1>
+        </md-toolbar>
+        <md-toolbar class="fixed-toolbar {{isScroll ? 'top' : ''}}">
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <button md-raised-button class="md-raised {{active=='home' ? ' md-primary ' : ''}}" [routerLink]="['/Home']">Home</button>
+                <button md-raised-button class="md-raised {{active=='about' ? ' md-primary ' : ''}}" [routerLink]="['/About']">About</button>
+                <button md-raised-button class="md-raised {{active=='users' ? ' md-primary ' : ''}}" [routerLink]="['/Users']">Users</button>
+            </section>
+        </md-toolbar>
+        <md-toolbar id="errorContent" class="" style="background-color: #af4444; display: none; text-align: center; min-height: 20px !important; padding: 10px;">
+            <span id="errorMessage">{{ 'TITLE' | translate }}</span>
+        </md-toolbar>
+
+        <md-content class="component-content">
+            <router-outlet></router-outlet>
+        </md-content>
+
+        <footer>
+        </footer>
+    </section>
+</md-sidenav-container>

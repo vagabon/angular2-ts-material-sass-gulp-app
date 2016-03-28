@@ -1,0 +1,38 @@
+<md-content class="md-padding" layout="row" layout-wrap layout-align="center start">
+    <div layout="column">
+    <md-card>
+        <md-card-title class="noFlex">
+            <md-card-title-media>
+                <img src="{{ 'ABOUT.IMG' | translate }}" class="card-media md-media-lg" alt="Grass" (click)="stop()">
+            </md-card-title-media>
+            <md-card-title-text>
+                <span class="md-headline">{{ 'ABOUT.TITLE' | translate }}</span>
+                <span class="md-subhead"><a href="{{ 'ABOUT.URL' | translate }}">{{ 'ABOUT.URL' | translate}}</a></span>
+                <p>{{ 'ABOUT.TEXT' | translate }}</p>
+                <md-progress-linear mode="determinate" [value]="determinateValue"></md-progress-linear>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>{{ 'ABOUT.REWINDS' | translate }}</p>
+            <p>&nbsp;</p>
+            <md-card [style.width]="rewind.content == 'ABOUT.CARD5.CONTENT' ? '320px' : '150px'" style="text-align: center; display: inline-block" *ngFor="#rewind of rewinds">
+                <a href="{{ rewind.url | translate }}">
+                    <img src="{{ rewind.img | translate }}" class="md-card-image" alt="Grass">
+                    <md-card-content>{{ rewind.content | translate }}</md-card-content>
+                </a>
+            </md-card>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <button md-button class="md-icon-button" aria-label="Favorite">
+                <i md-icon>favorite</i>
+            </button>
+            <button md-button class="md-icon-button" aria-label="Settings">
+                <i md-icon>menu</i>
+            </button>
+            <button md-button class="md-icon-button" aria-label="Share">
+                <i md-icon>share_arrow</i>
+            </button>
+        </md-card-actions>
+    </md-card>
+</div>
+</md-content>

@@ -1,0 +1,53 @@
+<md-content class="md-padding widthFull" layout="row" layout-wrap layout-align="center start">
+    <md-card>
+        <md-toolbar mdScrollShrink>
+            <div class="md-toolbar-tools">
+                <img src="{{ user?.image | imagePipe }}" class="md-avatar" alt="{{ user?.username }}'s picture" style="width: 40px; height: 40px !important; border-radius: 50%; " />
+                <h3 style="margin-left: 10px; ">
+                    <div *ngIf="!user">No user found</div>
+                    <div *ngIf="user">{{ username }}</div>
+                    <div *ngIf="user && user.id == null">{{ 'USER.NEW' | translate}}</div>
+                </h3>
+                <span flex></span>
+                <button md-raised-button class="md-raised md-icon-button" (click)="ngOnInit()">
+                    <i md-icon>refresh</i>
+                </button>
+            </div>
+        </md-toolbar>
+        <md-card-content *ngIf="user">
+            <i md-icon>add_a_photo</i>
+            <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+            <div layout-gt-sm="row" style="margin-top: 25px;">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>{{ 'USER.LABEL.USERNAME' | translate}}</label>
+                    <input md-input [value]="user?.username" [(ngModel)]="user.username">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>{{ 'USER.LABEL.PASSWORD' | translate}}</label>
+                    <input md-input [value]="user?.password" [(ngModel)]="user.password">
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>{{ 'USER.LABEL.EMAIL' | translate}}</label>
+                    <input md-input [value]="user?.email" [(ngModel)]="user.email">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>{{ 'USER.LABEL.CREATED' | translate }}</label>
+                    <input md-input [value]="user?.created" [(ngModel)]="user.created" type="date">
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-switch class="md-primary" [(checked)]="user.newsletter">
+                    {{ 'USER.LABEL.NEWSLETTER' | translate }}
+                </md-switch>
+            </div>
+            <crud-info [info]="info" [error]="error"></crud-info>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <button md-button [routerLink]="['../Users-list']">{{ 'BACK' | translate }}</button>
+            <button md-button type="button" name="submit" id="submit" (click)="sendForm()">{{ 'VALIDATE' | translate}}
+            </button>
+        </md-card-actions>
+    </md-card>
+</md-content>

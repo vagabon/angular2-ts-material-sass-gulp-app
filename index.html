@@ -1,0 +1,49 @@
+<html>
+
+    <head>
+        <script>document.write('<base href="' + document.location + '" />');</script>
+        <title></title>
+        <base href="/">
+        <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="Content-Style-Type" content="text/css"/>
+        <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+        <!-- CSS -->
+        <link href="dist/css/main.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Script -->
+        <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+        <script src="https://npmcdn.com/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+        <script src="node_modules/systemjs/dist/system.js"></script>
+        <script src="node_modules/angular2/bundles/http.dev.js"></script>
+        <script src="node_modules/angular2/bundles/router.dev.js"></script>
+        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+        <script>
+            System.config({
+                packages: {
+                    'dist/js': {defaultExtension: 'js'},
+                    'ng2-material': {defaultExtension: 'js'},
+                    "ng2-translate": {"defaultExtension": "js"}
+                },
+                map: {
+                    'ng2-material': 'node_modules/ng2-material',
+                    'ng2-translate': 'node_modules/ng2-translate'
+                }
+            });
+            System.import('dist/js/main').then(null, console.error.bind(console));
+        </script>
+
+    </head>
+
+    <body>
+    <app>
+        <div style="color: rgba(255, 255, 255, 0.870588); max-width: 100%; padding-top: 15px; text-align: center; height: 150px; font-size: 15px; width: 100%; background-color: #706c6c;">
+            <h1>Loading...</h1>
+        </div>
+    </app>
+    </body>
+
+</html>

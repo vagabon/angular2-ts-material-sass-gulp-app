@@ -1,0 +1,27 @@
+
+[md-button] [md-icon] {
+  color: rgba(0, 0, 0, 0.8);
+}
+p { padding-bottom: 10px !important; }
+
+.top { top: 0px; position: fixed; z-index: 3; }
+.widthFull { width: 100%; }
+.component-content { width: 800px; }
+
+md-card {
+  width: 100%;
+  md-card-title { flex: inherit !important;
+    md-card-title-text { padding-left: 10px; }
+  }
+}
+.md-avatar { height: 60px !important; }
+[md-raised-button].md-primary, .md-progress-linear-bar, .md-toolbar-tools { }
+
+.toolbar { text-align: center; height: 100px; }
+.fixed-toolbar { text-align: center; }
+
+md-toolbar:not(.md-menu-toolbar) [md-icon] { color: inherit; }
+
+md-input-container > button { position: absolute !important; top: 5px !important; left: 5px !important; margin: -7px -1px !important; }
+md-input-container > button + input { margin-left: 45px !important; width: 88% !important; }
+md-input-container > button + input + button { left: 94% !important; }

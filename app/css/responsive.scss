@@ -1,0 +1,16 @@
+
+@mixin responsive() {
+  body{ -webkit-text-size-adjust: none !important; }
+  .component-content { width: 100%; }
+  .toolbar { display: none !important; }
+  .fixed-toolbar { top: 0 !important; }
+  .md-padding { padding: 0px !important; }
+  md-card { margin-top: 0px !important;margin-left: 0px !important; margin-right: 0px !important; }
+}
+
+@media screen and (max-width: 800px) {
+  @include responsive();
+}
+@media screen and (max-device-width: 800px) {
+  @include responsive();
+}
