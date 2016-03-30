@@ -3,7 +3,7 @@
 
 ## Purpose 
 
-This is an Web Application made With Angular2, Typescript, Sass, Gilp and Material with Internationalization.
+This is an Web Application made With Angular2, Typescript, Sass, Gulp and Material with Internationalization.
 
 Live [Demo](http://vagabond.synology.me:81/sample-angular2/#/home)
 
