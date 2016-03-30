@@ -1,6 +1,5 @@
 import {Component, ElementRef, Input, Output, EventEmitter} from "angular2/core";
-import {MdDialog} from "ng2-material/all";
-import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
+import {MdDialogConfig, MdDialogBasic, MdDialogRef, MdDialog} from "ng2-material/all";
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 const DIALOG_CONFIRM_TITLE = "DIALOG.CONFIRM.TITLE";

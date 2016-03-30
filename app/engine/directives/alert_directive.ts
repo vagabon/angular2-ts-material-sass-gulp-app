@@ -1,6 +1,5 @@
 import {Component, ElementRef, Input, Output, EventEmitter} from "angular2/core";
-import {MdDialog} from "ng2-material/all";
-import {MdDialogConfig, MdDialogBasic} from "ng2-material/components/dialog/dialog";
+import {MdDialog, MdDialogConfig, MdDialogBasic} from "ng2-material/all";
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Observable} from 'rxjs/Observable';
 

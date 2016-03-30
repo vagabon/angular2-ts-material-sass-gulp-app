@@ -4,7 +4,7 @@ import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/component
 
 @Component({
   selector: 'about',
-  templateUrl: 'dist/components/about/about.html'
+  templateUrl: 'components/about/about.html'
 })
 export class AboutCmp {
 

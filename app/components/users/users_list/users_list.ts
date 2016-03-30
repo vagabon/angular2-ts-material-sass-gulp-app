@@ -9,7 +9,7 @@ const SHOW = 2;
 
 @Component({
   selector: 'users-list',
-  templateUrl: 'dist/components/users/users_list/users_list.html',
+  templateUrl: 'components/users/users_list/users_list.html',
   providers: [UserService]
 })
 export class UsersListCmp {

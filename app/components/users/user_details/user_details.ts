@@ -9,7 +9,7 @@ import {Logger, BaseCrud} from '../../../engine/all';
 
 @Component({
   selector: 'user-details',
-  templateUrl: 'dist/components/users/user_details/user_details.html',
+  templateUrl: 'components/users/user_details/user_details.html',
   providers: [UserService]
 })
 export class UserDetailsCmp extends BaseCrud implements OnInit {
