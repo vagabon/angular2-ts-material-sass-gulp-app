@@ -69,7 +69,7 @@ gulp.task('compile-ts', function () {
     gulp.src(['node_modules/ng2-translate/**/*']).pipe(gulp.dest('dist/node_modules/ng2-translate'));
     var sourceTsFiles = [config.listFilesTS, config.typingsFiles];
     var tsResult = gulp.src(sourceTsFiles).pipe(tsc(tsProject));
-    tsResult = prod ? tsResult.js.pipe(uglify()) : tsResult.js;
+    tsResult = prod == 0 ? tsResult.js.pipe(uglify()) : tsResult.js;
     return tsResult.pipe(gulp.dest(config.tsOutputPath)).pipe(connect.reload());
 });
 
