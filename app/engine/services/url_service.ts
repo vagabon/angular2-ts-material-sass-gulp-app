@@ -22,32 +22,72 @@ export class UrlService {
   constructor(public http:Http, public path: String) {
   }
 
-  getUrl(url) {
+  lauthGetUrl(url, observer) {
     Logger.log(url);
     var obj = document.getElementById("errorContent").style.display = "none";
-    return  Observable.create(observer => {
-      this.http.get(url)
-          .map(res => res.json())
-          .subscribe((data) => this.resolve(data, observer), (error) => this.handleError(error, observer));
-    });
+    var headers = new Headers();
+    headers.append('Authorization', Settings.TOKEN.NAME + ',' + Settings.TOKEN.VALUE);
+    Settings.TOKEN.NAME = '';
+    this.http.get(url, {headers:headers})
+        .map(res => res.json())
+        .subscribe((data) => this.resolve(data, observer), (error) => this.handleError(error, observer));
+  }
+
+  lauthPostUrl(url, json, observer) {
+    Logger.log(url, json);
+    document.getElementById("errorContent").style.display = "none";
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', Settings.TOKEN.NAME + ',' + Settings.TOKEN.VALUE);
+    Settings.TOKEN.NAME = '';
+    this.http.post(url, JSON.stringify(json), {headers:headers})
+        .map(res => res.json())
+        .subscribe((data) => this.resolve(data, observer), (error) => this.handleError(error, observer));
+  }
+
+  launchUrl(url, json, type) {
+    if (Settings.TOKEN.NAME == '') {
+      Settings.TOKEN.NAME = Math.random().toString(36).substring(2);
+      return Observable.create(observer => {
+        Logger.log(URL + "/token?name=" + Settings.TOKEN.NAME);
+        var headers = new Headers();
+        headers.append('Authorization', 'generate');
+        headers.append('content-Type', 'application/json');
+        this.http.get(URL + "/token?name=" + Settings.TOKEN.NAME, {headers:headers}).map(res => res.json()).subscribe((data) => {
+          Logger.log(data)
+          Settings.TOKEN.VALUE = data["token"];
+          if (type == "GET") {
+            this.lauthGetUrl(url, observer);
+          }
+          if (type == "POST") {
+            this.lauthPostUrl(url, json, observer);
+          }
+        });
+      });
+    } else {
+      return  Observable.create(observer => {
+        if (type == "GET") {
+          this.lauthGetUrl(url, observer);
+        }
+        if (type == "POST") {
+          this.lauthPostUrl(url, json, observer);
+        }
+      });
+    }
+  }
+
+  getUrl(url) {
+    return this.launchUrl(url, {}, "GET");
   }
 
   postUrl(url, json) {
-    Logger.log(url, json);
-    var obj = document.getElementById("errorContent").style.display = "none";
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return  Observable.create(observer => {
-      this.http.post(url, JSON.stringify(json), {headers:headers})
-        .map(res => res.json())
-        .subscribe((data) => this.resolve(data, observer), (error) => this.handleError(error, observer));
-    });
+    return this.launchUrl(url, json, "POST");
   }
 
   resolve(data, observer) {
     Logger.log(data);
     if (data.status == 500) {
-      var obj = document.getElementById("errorContent").style.display = "block";
+      document.getElementById("errorContent").style.display = "block";
       document.getElementById("errorMessage").innerHTML = data.stacktrace;
     }
     observer.next(data);
@@ -56,9 +96,10 @@ export class UrlService {
 
   handleError(error, observer) {
     console.error(error);
-    var obj = document.getElementById("errorContent").style.display = "block";
-    document.getElementById("errorMessage").innerHTML = error.json().error || 'Server error';
-    observer.error(error.json().error || 'Server error');
+    document.getElementById("errorContent").style.display = "block";
+    var errorText = error.json().error || 'Server error';
+    document.getElementById("errorMessage").innerHTML = errorText;
+    observer.error(errorText);
     observer.complete();
   }
 
