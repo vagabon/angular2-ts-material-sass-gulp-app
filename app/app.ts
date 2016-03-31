@@ -1,13 +1,13 @@
 /// <reference path="../node_modules/angular2/typings/browser.d.ts" />
 
-import {Component, enableProdMode, Input, provide, ViewEncapsulation, PLATFORM_PIPES, PLATFORM_DIRECTIVES} from 'angular2/core';
+import {Component, enableProdMode, provide, ViewEncapsulation, PLATFORM_PIPES, PLATFORM_DIRECTIVES} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, LocationStrategy, HashLocationStrategy, RouterLink} from 'angular2/router';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
-import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS, SidenavService, Media} from "ng2-material/all";
-import {TRANSLATE_PROVIDERS, TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 
-import {BaseApp, SearchBarDirective, InfoDirective, AlertDirective, ConfirmDirective, ImagePipe} from './engine/all';
+import {BaseApp, SearchBarDirective, InfoDirective, AlertDirective, ConfirmDirective, ImagePipe, UrlService} from './engine/all';
 import {Settings} from './settings';
 
 import {HomeCmp} from './components/home/home';
@@ -16,9 +16,9 @@ import {UsersCmp} from './components/users/users';
 
 @Component({
   selector: 'app',
-  templateUrl: 'main.html',
+  templateUrl: 'components/body.html',
   encapsulation: ViewEncapsulation.None,
-  providers :[SidenavService],
+  providers :[],
   directives: [ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES],
   pipes: [TranslatePipe]
 })

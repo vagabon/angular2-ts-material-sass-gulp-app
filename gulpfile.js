@@ -69,11 +69,18 @@ gulp.task('compile-ts', function () {
     gulp.src(['node_modules/ng2-translate/**/*']).pipe(gulp.dest('dist/node_modules/ng2-translate'));
     var sourceTsFiles = [config.listFilesTS, config.typingsFiles];
     var tsResult = gulp.src(sourceTsFiles).pipe(tsc(tsProject));
-    tsResult = prod == 0 ? tsResult.js.pipe(uglify()) : tsResult.js;
+    tsResult = prod == 'none' ? tsResult.js.pipe(uglify()) : tsResult.js;
     return tsResult.pipe(gulp.dest(config.tsOutputPath)).pipe(connect.reload());
 });
 
 gulp.task('build-ts', [ 'compile-ts' ], function () {
+    if (prod) {
+
+        gulp.src("./dist/index.html")
+            .pipe(replace('<script>document.write(\'<base href="\' + document.location + \'" />\');</script>', ''))
+            .pipe(replace('<base href="/">', ''))
+            .pipe(gulp.dest("./dist"));
+    }
     return gulp.src("./dist/js/settings.js")
         .pipe(replace('@URL@', prod || forceUrlProd ? config.urlProd : config.urlDev))
         .pipe(replace('\'@PROD@\'', prod))

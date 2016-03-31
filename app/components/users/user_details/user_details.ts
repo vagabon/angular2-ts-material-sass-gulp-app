@@ -67,25 +67,6 @@ export class UserDetailsCmp extends BaseCrud implements OnInit {
     this.imageAvatar = fileInput.target.files[0];
   }
 
-  makeFileRequest(url: string, file: File) {
-    return new Promise((resolve, reject) => {
-      var formData: any = new FormData();
-      formData.append("file", file);
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-          if (xhr.status == 200) {
-            resolve(JSON.parse(xhr.response));
-          } else {
-            reject(xhr.response);
-          }
-        }
-      }
-      xhr.open("POST", url, true);
-      xhr.send(formData);
-    });
-  }
-
   update() {
     this.urlService.update(this.user).subscribe((data) => {
       this.hasError(data).subscribe((data) => {
@@ -94,7 +75,7 @@ export class UserDetailsCmp extends BaseCrud implements OnInit {
         this.user.id = data.id;
         this.userId = data.id;
         this.ngOnInit();
-      });
+      }, (error) => { this.info = ""; this.error = error; });
     });
   }
 
@@ -105,7 +86,7 @@ export class UserDetailsCmp extends BaseCrud implements OnInit {
             this.user.image = data.image;
             this.update();
         });
-      });
+      }, (error) => { this.info = ""; this.error = error; });
     } else {
       this.update();
     }

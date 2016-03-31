@@ -6,6 +6,7 @@ export class Settings {
 
     static TOKEN = {
         'NAME': '',
-        'VALUE': ''
+        'VALUE': '',
+        'DATE': ''
     };
 }

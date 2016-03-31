@@ -23,15 +23,6 @@
 
         <script src="js/lib/ng2-material.js"></script>
         <script src="js/lib/ng2-translate.js"></script>
-        <!--
-        <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-        <script src="node_modules/systemjs/dist/system.js"></script>
-        <script src="node_modules/angular2/bundles/http.dev.js"></script>
-        <script src="node_modules/angular2/bundles/router.dev.js"></script>
-        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-        <script src="node_modules/rxjs/bundles/Rx.js"></script>
-        <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-        -->
 
         <script>
             System.config({
@@ -44,12 +35,9 @@
                     'js': 'js',
                     'ng2-material': 'node_modules/ng2-material',
                     'ng2-translate': 'node_modules/ng2-translate'
-
-                    //'ng2-material/all': 'dist/js/lib/ng2-material.js',
-                    //'ng2-translate/ng2-translate': 'js/lib/ng2-translate.js'
                 }
             });
-            System.import('js/main').then(null, console.error.bind(console));
+            System.import('js/app').then(null, console.error.bind(console));
         </script>
 
     </head>
