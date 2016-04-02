@@ -3,14 +3,22 @@ import {Observable} from 'rxjs/Observable';
 
 import {UrlService} from '../services/url_service';
 import {Logger} from '../log/logger';
+import {Settings} from '../../settings';
 
 export class BaseCrud {
 
   info:String = "";
   error:String = "";
+  userConnect;
 
   constructor(private _translate: TranslateService) {
 
+  }
+
+  ngDoCheck() {
+    if (this.userConnect != Settings.USER) {
+      this.userConnect = Settings.USER;
+    }
   }
 
   getError(data) {
@@ -54,6 +62,15 @@ export class BaseCrud {
         observer.complete();
       });
     });
+  }
+
+  fieldRequire(...values) {
+    for (let i = 0; i < values.length; i++) {
+      if (values[i] == '' || values[i] == undefined) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

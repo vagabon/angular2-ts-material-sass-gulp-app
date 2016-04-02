@@ -6,7 +6,6 @@ import {Logger} from '../log/logger';
 export class BaseApp {
 
   active:String = "";
-  isScroll:Boolean = false;
 
   constructor(private _translate: TranslateService) {
     var userLang = navigator.language.split('-')[0];
@@ -27,15 +26,7 @@ export class BaseApp {
   }
 
   onScroll(event) {
-    var body = document.body,
-        html = document.documentElement;
-    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-    if (event) {
-      if (window.scrollY == 0 || (height - window.outerHeight <= -100)) {
-        this.isScroll = false;
-      } else if (!this.isScroll) {
-        this.isScroll = true;
-      }
-    }
+    let top = 100 - window.scrollY < 0 ? 0 : 100 - window.scrollY;
+    window.document.getElementById("fixed-toolbar").style.top = top.toString();
   }
 }

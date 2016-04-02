@@ -1,12 +1,19 @@
-
-[md-button] [md-icon] {
-  color: rgba(0, 0, 0, 0.8);
-}
+[md-button] [md-icon] { color: rgba(0, 0, 0, 0.8); }
 p { padding-bottom: 10px !important; }
 
-.top { top: 0px; position: fixed; z-index: 3; }
 .widthFull { width: 100%; }
-.component-content { width: 800px; }
+.app-content {
+  .toolbar { text-align: center; height: 100px; z-index: 10; }
+  .fixed-toolbar {
+    text-align: center; position: fixed; z-index: 10; margin-top: -2px;
+    button {
+      &.login { position: absolute; right: 10px; min-width: 40px !important; [md-icon] { margin-left: -2px !important; } span.text { } }
+      &.login-img { right: 40px; z-index: 20; top: -2px; }
+      [md-icon] { margin: 5px -11px; position: absolute; }
+      span.text { margin-left: 15px; } }
+  }
+  .component-content { width: 800px; margin-top: 60px; }
+}
 
 md-card {
   width: 100%;
@@ -17,8 +24,6 @@ md-card {
 .md-avatar { height: 60px !important; }
 [md-raised-button].md-primary, .md-progress-linear-bar, .md-toolbar-tools { }
 
-.toolbar { text-align: center; height: 100px; }
-.fixed-toolbar { text-align: center; }
 
 md-toolbar:not(.md-menu-toolbar) [md-icon] { color: inherit; }
 
@@ -33,7 +38,7 @@ login {
     border: 1px solid #e1e1e1;
     .md-tab {
       border-right: 1px solid #eaeaea !important;
-      .md-active {
+      &.md-active {
         background-color: #757575 !important;
         color: white;
       }

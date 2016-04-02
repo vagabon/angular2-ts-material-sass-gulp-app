@@ -112,6 +112,10 @@ export class UrlService {
     return this.launchUrl(url, {}, "GET");
   }
 
+  postUrlBase(url, json) {
+    return this.launchUrl(Settings.URL + url, json, "POST");
+  }
+
   postUrl(url, json) {
     return this.launchUrl(url, json, "POST");
   }

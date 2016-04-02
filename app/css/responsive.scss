@@ -1,16 +1,14 @@
 
-@mixin responsive() {
-  body{ -webkit-text-size-adjust: none !important; }
-  .component-content { width: 100%; }
-  .toolbar { display: none !important; }
-  .fixed-toolbar { top: 0 !important; }
-  .md-padding { padding: 0px !important; }
-  md-card { margin-top: 0px !important;margin-left: 0px !important; margin-right: 0px !important; }
-}
-
 @media screen and (max-width: 800px) {
-  @include responsive();
-}
-@media screen and (max-device-width: 800px) {
-  @include responsive();
+  body{ -webkit-text-size-adjust: none !important; }
+  .app-content {
+    .toolbar { display: none !important; }
+    .fixed-toolbar {
+      top: 0 !important;
+      button { width: 35px !important; min-width: 0px !important; [md-icon] { margin: 5px 0px; position: absolute; } span.text { margin-left: 30px; } }
+    }
+    .component-content { width: 100%; }
+    md-card { margin-top: 0px !important;margin-left: 0px !important; margin-right: 0px !important; }
+    .md-padding { padding: 0px !important; }
+  }
 }

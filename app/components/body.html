@@ -4,23 +4,42 @@
         <md-toolbar class="toolbar">
             <h1>{{ 'TITLE' | translate }}</h1>
         </md-toolbar>
-        <md-toolbar class="fixed-toolbar {{isScroll ? 'top' : ''}}">
+        <md-toolbar id="fixed-toolbar" class="fixed-toolbar {{isScroll ? 'top' : ''}}">
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <button md-raised-button class="md-raised {{active=='home' ? ' md-primary ' : ''}}" [routerLink]="['/Home']">Home</button>
-                <button md-raised-button class="md-raised {{active=='about' ? ' md-primary ' : ''}}" [routerLink]="['/About']">About</button>
-                <button md-raised-button class="md-raised {{active=='users' ? ' md-primary ' : ''}}" [routerLink]="['/Users']">Users</button>
-                <button md-raised-button class="md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Login']">Login</button>
+                <button md-raised-button class=" md-raised {{active=='home' ? ' md-primary ' : ''}}" [routerLink]="['/Home']">
+                    <i md-icon flex>home</i>
+                    <span class="text">Home</span>
+                </button>
+                <button md-raised-button class="md-raised {{active=='about' ? ' md-primary ' : ''}}" [routerLink]="['/About']">
+                    <i md-icon flex>info_outline</i>
+                    <span class="text">About</span>
+                </button>
+                <button md-raised-button class="md-raised {{active=='users' ? ' md-primary ' : ''}}" [routerLink]="['/Users']">
+                    <i md-icon>perm_identity</i>
+                    <span class="text">Users</span>
+                </button>
+                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Login']" *ngIf="user.username=='' || user.username=='anonymous'">
+                    <i md-icon>account_circle</i>
+                    <span class="text">&nbsp;</span>
+                </button>
+                <button md-raised-button class="login login-img md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Users/User-details', { userId: user.id }]" *ngIf="user.username!='' && user.username!='anonymous'">
+                    <img src="{{ user?.image | imagePipe }}" style="width: 40px; height: 40px;" />
+                </button>
+                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" (click)="logout()" *ngIf="user.username!='' && user.username!='anonymous'">
+                    <i md-icon>close</i>
+                    <span class="text">&nbsp;</span>
+                </button>
             </section>
             {{login}}
-        </md-toolbar>
-        <md-toolbar id="errorContent" class="" style="background-color: #af4444; display: none; text-align: center; min-height: 20px !important; padding: 10px;">
-            <span id="errorMessage">{{ 'TITLE' | translate }}</span>
         </md-toolbar>
 
         <md-content class="component-content">
             <router-outlet></router-outlet>
         </md-content>
 
+        <md-toolbar id="errorContent" class="" style="background-color: #af4444; display: none; text-align: center; min-height: 20px !important; padding: 10px;">
+            <span id="errorMessage">{{ 'TITLE' | translate }}</span>
+        </md-toolbar>
         <footer>
         </footer>
     </section>

@@ -24,14 +24,39 @@ export class LoginComponent extends BaseCrud {
     this.user = new UserDto();
   }
 
-  sendForm() {
+  login() {
     if (this.user.username == '' || this.user.password == '') {
       this.error = "Empty login or password";
       return;
     }
     this.urlService.login(this.user, true).subscribe((data) => {
       this.hasError(data).subscribe((data) => {
-        this.info = "Login !!!"
+        window.location.hash = "#/home";
+      });
+    }, (error) => { this.info = ""; this.error = error; });
+  }
+
+  createAccount() {
+    console.log(this.user.username, this.user.password, this.user.passwordConfirm, this.user.email, this.user.emailConfirm)
+    if (this.fieldRequire(this.user.username, this.user.password, this.user.passwordConfirm, this.user.email, this.user.emailConfirm)) {
+      this.error = "Migging field(s)";
+      return;
+    }
+    if (this.user.password != this.user.passwordConfirm) {
+      this.error = "not the same password";
+      return;
+    }
+    if (this.user.email != this.user.emailConfirm) {
+      this.error = "not the same email";
+      return;
+    }
+    let newUser = new UserDto();
+    newUser.username = this.user.username;
+    newUser.password = btoa(this.user.password);
+    newUser.email = this.user.email;
+    this.urlService.postUrlBase("/user/createAccount", newUser).subscribe((data) => {
+      this.hasError(data).subscribe((data) => {
+        this.info = "User created"
       });
     }, (error) => { this.info = ""; this.error = error; });
   }

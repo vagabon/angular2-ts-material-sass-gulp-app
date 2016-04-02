@@ -32,7 +32,8 @@ import {UsersCmp} from './components/users/users';
 export class AppCmp extends BaseApp {
 
   urlService:UrlService;
-  login = "";
+  url;
+  user;
 
   constructor(private translate: TranslateService, public http:Http) {
     super(translate);
@@ -40,10 +41,20 @@ export class AppCmp extends BaseApp {
   }
 
   ngDoCheck() {
-    console.log(Settings.USER);
-    this.login = Settings.USER.username;
+    if (this.user != Settings.USER) {
+      this.user = Settings.USER;
+    }
+    if (this.url != window.location.hash) {
+      this.url = window.location.hash;
+      document.getElementById("errorContent").style.display = "none";
+    }
   }
 
+  logout() {
+    Settings.TOKEN = '';
+    Settings.USER.username= 'anonymous';
+    window.location.hash = "#/login";
+  }
 }
 if (Settings.PROD) {
   enableProdMode();
