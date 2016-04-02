@@ -90,6 +90,6 @@ export class UserDetailsCmp extends BaseCrud implements OnInit {
     } else {
       this.update();
     }
-
   }
+
 }

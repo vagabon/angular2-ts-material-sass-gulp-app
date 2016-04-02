@@ -17,3 +17,6 @@ export {ConfirmDirective}    from './directives/confirm_directive'
 export {InfoDirective}      from './directives/info_directive'
 export {SearchBarDirective} from './directives/search_bar_directive'
 
+/****************** DTO ******************************************************************/
+export {UserDto}          from './dto/user.dto'
+

@@ -9,7 +9,9 @@
                 <button md-raised-button class="md-raised {{active=='home' ? ' md-primary ' : ''}}" [routerLink]="['/Home']">Home</button>
                 <button md-raised-button class="md-raised {{active=='about' ? ' md-primary ' : ''}}" [routerLink]="['/About']">About</button>
                 <button md-raised-button class="md-raised {{active=='users' ? ' md-primary ' : ''}}" [routerLink]="['/Users']">Users</button>
+                <button md-raised-button class="md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Login']">Login</button>
             </section>
+            {{login}}
         </md-toolbar>
         <md-toolbar id="errorContent" class="" style="background-color: #af4444; display: none; text-align: center; min-height: 20px !important; padding: 10px;">
             <span id="errorMessage">{{ 'TITLE' | translate }}</span>

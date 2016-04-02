@@ -5,6 +5,7 @@ import 'rxjs/Rx';
 
 import {Logger} from '../log/logger';
 import {Settings} from "../../settings";
+import {UserDto} from '../dto/user.dto';
 
 const URL = Settings.URL;
 const FINDALL = '/findall';
@@ -19,7 +20,7 @@ export class UrlService {
 
   data: Array<any>;
 
-  constructor(public http:Http, public path) {
+  constructor(public http:Http, public path = "") {
   }
 
   resolve(data, observer) {
@@ -43,62 +44,66 @@ export class UrlService {
 
   getHeaders(json = false) {
     var headers = new Headers();
-    headers.append('Authorization', Settings.TOKEN.NAME + '$$$$' + Settings.TOKEN.VALUE);
+    headers.append('Authorization', Settings.TOKEN);
     if (json) {
       headers.append('Content-Type', 'application/json');
     }
     return headers;
   }
 
-  lauthGetUrl(url, observer) {
+  lauthGetUrlObserver(url, observer) {
     Logger.log(url);
     this.http.get(url, {headers: this.getHeaders()})
         .map(res => res.json())
         .subscribe((data) => this.resolve(data, observer), (error) => this.handleError(error, observer));
   }
 
-  lauthPostUrl(url, json, observer) {
+  lauthPostUrlObserver(url, json, observer) {
     Logger.log(url, json);
     this.http.post(url, JSON.stringify(json), {headers: this.getHeaders(true)})
         .map(res => res.json())
         .subscribe((data) => this.resolve(data, observer), (error) => this.handleError(error, observer));
   }
 
+  launchUrlObserver(url, json, type, observer) {
+    document.getElementById("errorContent").style.display = "none";
+    if (type == "GET") {
+      this.lauthGetUrlObserver(url, observer);
+    }
+    if (type == "POST") {
+      this.lauthPostUrlObserver(url, json, observer);
+    }
+
+  }
+
+  login(user:UserDto, encrypte = false) {
+    document.getElementById("errorContent").style.display = "none";
+    return Observable.create(observer => {
+      Logger.log(URL + "/login");
+      this.http.post(URL + "/login", JSON.stringify(new UserDto(user.username, encrypte ? btoa(user.password) : user.password)), {headers: this.getHeaders(true)})
+          .map(res => res.json()).subscribe((data) => {
+            console.log(data["token"])
+            if (data["token"] && data["token"] != "") {
+              Settings.USER = data["user"];
+              console.log(Settings.USER)
+              Settings.TOKEN = data["token"];
+            }
+            observer.next(data);
+          }, (error) => this.handleError(error, observer));
+    });
+  }
+
   launchUrl(url, json, type) {
     document.getElementById("errorContent").style.display = "none";
-    if (Settings.TOKEN.NAME == '') {
-      Settings.TOKEN.NAME = Math.random().toString(36).substring(2);
-    }
-    if (1) {
+    if (Settings.TOKEN == '') {
       return Observable.create(observer => {
-        Logger.log(URL + "/token?name=" + Settings.TOKEN.NAME);
-        var headers = new Headers();
-        headers.append('Authorization', 'generate');
-        headers.append('content-Type', 'application/json');
-        this.http.get(URL + "/token?name=" + Settings.TOKEN.NAME, {headers:headers}).map(res => res.json()).subscribe((data) => {
-          Logger.log(data)
-          if (data["generate"] && data["generate"] == "1") {
-            Settings.TOKEN.NAME = data["name"];
-            Settings.TOKEN.VALUE = data["token"];
-            Settings.TOKEN.DATE = data["date"];
-          }
-          if (type == "GET") {
-            this.lauthGetUrl(url, observer);
-          }
-          if (type == "POST") {
-            this.lauthPostUrl(url, json, observer);
-          }
+        this.login(new UserDto(Settings.USERNAME, Settings.PASSWORD)).subscribe((data) => {
+          this.launchUrlObserver(url, json, type, observer);
         }, (error) => this.handleError(error, observer));
       });
     } else {
-      Logger.log("Sans demande de jeton");
-      return  Observable.create(observer => {
-        if (type == "GET") {
-          this.lauthGetUrl(url, observer);
-        }
-        if (type == "POST") {
-          this.lauthPostUrl(url, json, observer);
-        }
+      return Observable.create(observer => {
+        this.launchUrlObserver(url, json, type, observer);
       });
     }
   }
@@ -139,8 +144,8 @@ export class UrlService {
   }
 
   upload(file: File) {
-    Logger.log(URL + this.path + UPLOAD, File);
-    var obj = document.getElementById("errorContent").style.display = "none";
+    document.getElementById("errorContent").style.display = "none";
+    Logger.log("POST", URL + this.path + UPLOAD + "?token=" + Settings.TOKEN);
     return Observable.create(observer => {
       var formData:any = new FormData();
       formData.append("file", file);
@@ -148,19 +153,19 @@ export class UrlService {
       xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
           if (xhr.status == 200) {
-            console.log(xhr.response);
+            Logger.log(xhr.response);
             if (xhr.response != "") {
               observer.next(JSON.parse(xhr.response));
             }
           } else {
             observer.error(xhr.response);
-            var obj = document.getElementById("errorContent").style.display = "block";
+            document.getElementById("errorContent").style.display = "block";
             document.getElementById("errorMessage").innerHTML = xhr.response;
           }
           observer.complete();
         }
       }
-      xhr.open("POST", URL + this.path + UPLOAD, true);
+      xhr.open("POST", URL + this.path + UPLOAD + "?token=" + Settings.TOKEN, true);
       xhr.send(formData);
     });
   }

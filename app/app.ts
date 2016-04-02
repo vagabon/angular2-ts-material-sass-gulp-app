@@ -12,6 +12,7 @@ import {Settings} from './settings';
 
 import {HomeCmp} from './components/home/home';
 import {AboutCmp} from './components/about/about';
+import {LoginComponent} from './components/login/login';
 import {UsersCmp} from './components/users/users';
 
 @Component({
@@ -25,12 +26,22 @@ import {UsersCmp} from './components/users/users';
 @RouteConfig([
   { path: '/home', component: HomeCmp, as: 'Home', useAsDefault: true },
   { path: '/about', component: AboutCmp, as: 'About' },
-  { path: '/users/...', component: UsersCmp, as: 'Users' }
+  { path: '/users/...', component: UsersCmp, as: 'Users' },
+  { path: '/login', component: LoginComponent, as: 'Login' }
 ])
 export class AppCmp extends BaseApp {
 
-  constructor(private translate: TranslateService) {
+  urlService:UrlService;
+  login = "";
+
+  constructor(private translate: TranslateService, public http:Http) {
     super(translate);
+    this.urlService = new UrlService(http, "");
+  }
+
+  ngDoCheck() {
+    console.log(Settings.USER);
+    this.login = Settings.USER.username;
   }
 
 }

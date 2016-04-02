@@ -8,7 +8,7 @@ var GulpConfig = (function () {
         this.files 		      = ['**/*.html', '**/*.scss', '**/*.js'];
         this.vendor           = ["node_modules/es6-shim/es6-shim.min.js", "node_modules/systemjs/dist/system.js", "node_modules/angular2/bundles/http.dev.js",
                                 "node_modules/angular2/bundles/router.dev.js", "node_modules/angular2/bundles/angular2-polyfills.js", "node_modules/rxjs/bundles/Rx.js",
-                                "node_modules/angular2/bundles/angular2.dev.js", "node_modules/ng2-material/dist/ng2-material.js", "node_modules/ng2-translate/bundles/ng2-translate.js"];
+                                "node_modules/angular2/bundles/angular2.dev.js", "node_modules/es6-shim/es6-shim.map", "node_modules/systemjs/dist/system.js.map"];
         this.source           = './app/';
         this.build            = './dist/';
         this.mainScss	      = this.source + '/css/main.scss';

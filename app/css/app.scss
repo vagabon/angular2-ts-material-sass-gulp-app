@@ -25,3 +25,21 @@ md-toolbar:not(.md-menu-toolbar) [md-icon] { color: inherit; }
 md-input-container > button { position: absolute !important; top: 5px !important; left: 5px !important; margin: -7px -1px !important; }
 md-input-container > button + input { margin-left: 45px !important; width: 88% !important; }
 md-input-container > button + input + button { left: 94% !important; }
+
+login {
+  background-color: transparent !important;
+  md-tabs {
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1;
+    .md-tab {
+      border-right: 1px solid #eaeaea !important;
+      .md-active {
+        background-color: #757575 !important;
+        color: white;
+      }
+    }
+  }
+  h1:first-child {
+    margin-top: 0;
+  }
+}

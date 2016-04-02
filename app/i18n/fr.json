@@ -5,6 +5,12 @@
   "VALIDATE": "Valider",
   "REQUIRED": "is required !",
 
+  "ERROR": {
+    "METIER": "Metier error",
+    "TECHNICAL": "Technical error",
+    "LOGIN_INVALID": "Login invalid"
+  },
+
   "DIALOG": {
     "ALERT": { "TITLE": "Alert", "OK": "Ok" },
     "CONFIRM": { "TITLE": "Confirm", "YES": "Yes", "NO": "No" }
@@ -19,6 +25,12 @@
       "ACTION1": "action 1",
       "ACTION2": "action 2"
     }
+  },
+
+  "LOGIN": {
+    "CONNECT": "Sign in",
+    "CREATE": "Create an account",
+    "PWDLOST": "Password forgoten"
   },
 
   "ABOUT": {
