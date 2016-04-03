@@ -64,7 +64,8 @@
       "PASSWORD": "Password",
       "EMAIL": "Email",
       "CREATED": "Créé",
-      "NEWSLETTER": "Newsletter"
+      "NEWSLETTER": "Newsletter",
+      "ROLE": "Role"
     },
     "MORE": "More..."
   }

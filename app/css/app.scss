@@ -5,14 +5,18 @@ p { padding-bottom: 10px !important; }
 .app-content {
   .toolbar { text-align: center; height: 100px; z-index: 10; }
   .fixed-toolbar {
-    text-align: center; position: fixed; z-index: 10; margin-top: -2px;
+    text-align: center; position: fixed; z-index: 10; margin-top: -2px; padding-top: 6px;
     button {
       &.login { position: absolute; right: 10px; min-width: 40px !important; [md-icon] { margin-left: -2px !important; } span.text { } }
-      &.login-img { right: 40px; z-index: 20; top: -2px; }
+      &.back { position: absolute; left: 10px; min-width: 40px !important; border-radius: 50%; [md-icon] { margin-left: -2px !important; } span.text { } }
+      &.login-img { right: 40px; z-index: 20; top: 4px; }
       [md-icon] { margin: 5px -11px; position: absolute; }
       span.text { margin-left: 15px; } }
   }
   .component-content { width: 800px; margin-top: 60px; }
+}
+md-input-container {
+  .md-input[disabled] { color: rgba(0, 0, 0, 0.45); }
 }
 
 md-card {

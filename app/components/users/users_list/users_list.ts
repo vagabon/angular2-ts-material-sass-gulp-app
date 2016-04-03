@@ -1,11 +1,10 @@
 import {Component} from 'angular2/core';
-import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {UserService} from '../services/user_service';
 import {ConfirmDirective, Logger} from '../../../engine/all';
 
 const MIN = 0;
-const SHOW = 2;
+const SHOW = 8;
 
 @Component({
   selector: 'users-list',
@@ -18,7 +17,7 @@ export class UsersListCmp {
   min = 0;
   users = [];
 
-  constructor(private translate: TranslateService, private urlService:UserService) {
+  constructor(private urlService:UserService) {
     this.min = MIN;
   }
 

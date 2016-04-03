@@ -80,6 +80,14 @@ export class UserDetailsCmp extends BaseCrud implements OnInit {
   }
 
   sendForm() {
+    if (this.user.passwordDecode != '') {
+      if (this.user.passwordDecode != this.user.passwordDecodeConfirm) {
+        this.error = "not the same password";
+        return;
+      }
+      this.user.password = btoa(this.user.passwordDecode);
+    }
+
     if (this.imageAvatar != null) {
       this.urlService.upload(this.imageAvatar).subscribe((data) => {
         this.hasError(data).subscribe((data) => {

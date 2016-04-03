@@ -38,6 +38,12 @@ export class UrlService {
     document.getElementById("errorContent").style.display = "block";
     var errorText = error || 'Server error';
     window.document.getElementById("errorMessage").innerText = error.status;
+    if (error.status == 401) {
+      Settings.TOKEN = '';
+      Settings.USER = { id: 0, 'username': '', 'role': '' };
+      localStorage.setItem("USER", null);
+      localStorage.setItem("TOKEN", null);
+    }
     observer.error(errorText);
     observer.complete();
   }
@@ -85,8 +91,10 @@ export class UrlService {
             console.log(data["token"])
             if (data["token"] && data["token"] != "") {
               Settings.USER = data["user"];
-              console.log(Settings.USER)
               Settings.TOKEN = data["token"];
+              Logger.log(Settings.TOKEN, Settings.USER);
+              localStorage.setItem("USER", JSON.stringify(Settings.USER));
+              localStorage.setItem("TOKEN", Settings.TOKEN);
             }
             observer.next(data);
           }, (error) => this.handleError(error, observer));

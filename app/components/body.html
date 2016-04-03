@@ -6,6 +6,10 @@
         </md-toolbar>
         <md-toolbar id="fixed-toolbar" class="fixed-toolbar {{isScroll ? 'top' : ''}}">
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <button md-raised-button class="back {{active=='login' ? ' md-primary ' : ''}}" (click)="back()" *ngIf="history.length > 1">
+                    <i md-icon>keyboard_backspace</i>
+                    <span class="text">&nbsp;</span>
+                </button>
                 <button md-raised-button class=" md-raised {{active=='home' ? ' md-primary ' : ''}}" [routerLink]="['/Home']">
                     <i md-icon flex>home</i>
                     <span class="text">Home</span>
@@ -18,14 +22,14 @@
                     <i md-icon>perm_identity</i>
                     <span class="text">Users</span>
                 </button>
-                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Login']" *ngIf="user.username=='' || user.username=='anonymous'">
+                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Login']" *ngIf="username=='' || username=='anonymous'">
                     <i md-icon>account_circle</i>
                     <span class="text">&nbsp;</span>
                 </button>
-                <button md-raised-button class="login login-img md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Users/User-details', { userId: user.id }]" *ngIf="user.username!='' && user.username!='anonymous'">
+                <button md-raised-button class="login login-img md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Users/User-details', { userId: userId }]" *ngIf="username!='' && username!='anonymous'">
                     <img src="{{ user?.image | imagePipe }}" style="width: 40px; height: 40px;" />
                 </button>
-                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" (click)="logout()" *ngIf="user.username!='' && user.username!='anonymous'">
+                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" (click)="logout()" *ngIf="username!='' && username!='anonymous'">
                     <i md-icon>close</i>
                     <span class="text">&nbsp;</span>
                 </button>

@@ -15,38 +15,52 @@
             </div>
         </md-toolbar>
         <md-card-content *ngIf="user">
-            <i md-icon>add_a_photo</i>
-            <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+            <i md-icon [owner]="user?.id">add_a_photo</i>
+            <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." [owner]="user?.id" />
             <div layout-gt-sm="row" style="margin-top: 25px;">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>{{ 'USER.LABEL.USERNAME' | translate}}</label>
-                    <input md-input [value]="user?.username" [(ngModel)]="user.username">
+                    <input md-input [value]="user?.username" [(ngModel)]="user.username" [disabled]="disabled(user.id)">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>{{ 'USER.LABEL.EMAIL' | translate}}</label>
+                    <input md-input [value]="user?.email" [(ngModel)]="user.email" [disabled]="disabled(user.id)">
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row" style="margin-top: 25px;" [owner]="user?.id">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>{{ 'USER.LABEL.PASSWORD' | translate}}</label>
+                    <input md-input [value]="user?.passwordDecode" [(ngModel)]="user.passwordDecode" [disabled]="disabled(user.id)" type="password">
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>{{ 'USER.LABEL.PASSWORD' | translate}}</label>
-                    <input md-input [value]="user?.password" [(ngModel)]="user.password">
+                    <input md-input [value]="user?.passwordDecodeConfirm" [(ngModel)]="user.passwordDecodeConfirm" [disabled]="disabled(user.id)" type="password">
                 </md-input-container>
             </div>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>{{ 'USER.LABEL.EMAIL' | translate}}</label>
-                    <input md-input [value]="user?.email" [(ngModel)]="user.email">
+                    <label style="transform: none;">{{ 'USER.LABEL.ROLE' | translate}}</label>
+                    <select [value]="user?.role" [(ngModel)]="user.role" [disabled]="disabledAdmin()">
+                        <option value="ANONYMOUS">ANONYMOUS</option>
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>{{ 'USER.LABEL.CREATED' | translate }}</label>
-                    <input md-input [value]="user?.created" [(ngModel)]="user.created" type="date">
+                    <input md-input [value]="user?.created" [(ngModel)]="user.created" type="date" [disabled]="disabled(user.id)">
                 </md-input-container>
             </div>
             <div layout-gt-sm="row">
-                <md-switch class="md-primary" [(checked)]="user.newsletter">
+                <md-switch class="md-primary" [(checked)]="user.newsletter" [disabled]="disabled(user.id)">
                     {{ 'USER.LABEL.NEWSLETTER' | translate }}
                 </md-switch>
             </div>
             <crud-info [info]="info" [error]="error"></crud-info>
         </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
+        <md-card-actions layout="row" layout-align="end center" *ngIf="user">
             <button md-button [routerLink]="['../Users-list']">{{ 'BACK' | translate }}</button>
-            <button md-button type="button" name="submit" id="submit" (click)="sendForm()">{{ 'VALIDATE' | translate}}</button>
+            <button md-button type="button" name="submit" id="submit" (click)="sendForm()" hasRole="USER" [owner]="user?.id">{{ 'VALIDATE' | translate}}</button>
         </md-card-actions>
     </md-card>
 </md-content>

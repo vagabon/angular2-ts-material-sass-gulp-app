@@ -21,6 +21,14 @@ export class BaseCrud {
     }
   }
 
+  disabled(id) {
+    return !(id == Settings.USER.id || Settings.USER.role == "ADMIN");
+  }
+
+  disabledAdmin() {
+    return !(Settings.USER.role == "ADMIN");
+  }
+
   getError(data) {
     return Observable.create(observer => {
       let hasError = false;
