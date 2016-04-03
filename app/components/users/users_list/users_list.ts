@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 
 import {UserService} from '../services/user_service';
-import {ConfirmDirective, Logger} from '../../../engine/all';
+import {ConfirmDirective, Logger, BaseCrud} from '../../../engine/all';
 
 const MIN = 0;
 const SHOW = 8;
@@ -11,13 +11,14 @@ const SHOW = 8;
   templateUrl: 'components/users/users_list/users_list.html',
   providers: [UserService]
 })
-export class UsersListCmp {
+export class UsersListCmp extends BaseCrud {
 
   loading;
   min = 0;
   users = [];
 
   constructor(private urlService:UserService) {
+    super(null);
     this.min = MIN;
   }
 

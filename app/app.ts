@@ -40,13 +40,6 @@ export class AppCmp extends BaseApp {
   constructor(private translate: TranslateService, public http:Http) {
     super(translate);
     this.urlService = new UrlService(http, "");
-    if (localStorage.getItem("TOKEN") != '') {
-      Settings.TOKEN = localStorage.getItem("TOKEN");
-      Settings.USER = JSON.parse(localStorage.getItem("USER"));
-    } else {
-      Settings.TOKEN = '';
-      Settings.USER = { id: 0, 'username': '', 'role': '' };
-    }
     this.username = 'anonymous';
   }
 

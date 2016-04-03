@@ -15,6 +15,15 @@ export class BaseCrud {
 
   }
 
+  routerOnActivate(next, prev) {
+    console.log("dsqdqsdsq")
+    console.log('Finished navigating from "${prev ? prev.urlPath : null}" to "${next.urlPath}');
+    return new Promise(resolve => {
+      // The ChildCmp gets instantiated only when the Promise is resolved
+      setTimeout(() => resolve(null), 1000);
+    });
+  }
+
   ngDoCheck() {
     if (this.userConnect != Settings.USER) {
       this.userConnect = Settings.USER;

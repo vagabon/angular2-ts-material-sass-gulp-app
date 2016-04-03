@@ -82,11 +82,11 @@ export class UrlService {
 
   }
 
-  login(user:UserDto, encrypte = false) {
+  login(user:UserDto, encrypte = false, reload = false) {
     document.getElementById("errorContent").style.display = "none";
     return Observable.create(observer => {
-      Logger.log(URL + "/login");
-      this.http.post(URL + "/login", JSON.stringify(new UserDto(user.username, encrypte ? btoa(user.password) : user.password)), {headers: this.getHeaders(true)})
+      Logger.log(URL + "/login" + (reload ? "?reload=true" : ""));
+      this.http.post(URL + "/login" + (reload ? "?reload=true" : ""), JSON.stringify(new UserDto(user.username, encrypte ? btoa(user.password) : user.password)), {headers: this.getHeaders(true)})
           .map(res => res.json()).subscribe((data) => {
             console.log(data["token"])
             if (data["token"] && data["token"] != "") {
@@ -103,9 +103,12 @@ export class UrlService {
 
   launchUrl(url, json, type) {
     document.getElementById("errorContent").style.display = "none";
-    if (Settings.TOKEN == '') {
+    if (Settings.TOKEN == '' && Settings.TOKEN != null) {
+      if (localStorage.getItem("TOKEN") != '') {
+        Settings.TOKEN = localStorage.getItem("TOKEN");
+      }
       return Observable.create(observer => {
-        this.login(new UserDto(Settings.USERNAME, Settings.PASSWORD)).subscribe((data) => {
+        this.login(new UserDto(Settings.USERNAME, Settings.PASSWORD), false, true).subscribe((data) => {
           this.launchUrlObserver(url, json, type, observer);
         }, (error) => this.handleError(error, observer));
       });
