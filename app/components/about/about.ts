@@ -1,5 +1,4 @@
 import {Component, ElementRef} from 'angular2/core';
-import {TranslateService} from 'ng2-translate/ng2-translate';
 import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
 
 @Component({
@@ -12,7 +11,7 @@ export class AboutCmp {
   interval = null;
   rewinds = [];
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     for (let i = 0; i < 11; i++) {
       this.rewinds[i] = {
         url: "ABOUT.CARD" + i + ".URL",

@@ -6,7 +6,7 @@
         </md-toolbar>
         <md-toolbar id="fixed-toolbar" class="fixed-toolbar {{isScroll ? 'top' : ''}}">
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <button md-raised-button class="back {{active=='login' ? ' md-primary ' : ''}}" (click)="back()" *ngIf="history.length > 1">
+                <button md-raised-button class="back {{active=='back' ? ' md-primary ' : ''}}" (click)="back()" *ngIf="history.length > 1">
                     <i md-icon>keyboard_backspace</i>
                     <span class="text">&nbsp;</span>
                 </button>
@@ -22,23 +22,22 @@
                     <i md-icon>perm_identity</i>
                     <span class="text">Users</span>
                 </button>
-                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Login']" *ngIf="username=='' || username=='anonymous'">
+                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Login']" *ngIf="loading && (username=='' || username=='anonymous')">
                     <i md-icon>account_circle</i>
                     <span class="text">&nbsp;</span>
                 </button>
-                <button md-raised-button class="login login-img md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Users/User-details', { userId: userId }]" *ngIf="username!='' && username!='anonymous'">
+                <button md-raised-button class="login login-img md-raised {{active=='login' ? ' md-primary ' : ''}}" [routerLink]="['/Users/User-details', { userId: userId }]" *ngIf="loading && username!='' && username!='anonymous'">
                     <img src="{{ user?.image | imagePipe }}" style="width: 40px; height: 40px;" />
                 </button>
-                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" (click)="logout()" *ngIf="username!='' && username!='anonymous'">
+                <button md-raised-button class="login md-raised {{active=='login' ? ' md-primary ' : ''}}" (click)="logout()" *ngIf="loading && username!='' && username!='anonymous'">
                     <i md-icon>close</i>
                     <span class="text">&nbsp;</span>
                 </button>
             </section>
-            {{login}}
         </md-toolbar>
 
         <md-content class="component-content">
-            <router-outlet></router-outlet>
+            <router-outlet *ngIf="loading == true"></router-outlet>
         </md-content>
 
         <md-toolbar id="errorContent" class="" style="background-color: #af4444; display: none; text-align: center; min-height: 20px !important; padding: 10px;">

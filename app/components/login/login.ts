@@ -1,6 +1,6 @@
-import {Component, Inject, ViewEncapsulation} from 'angular2/core';
+import {Component, Inject, ViewEncapsulation, QueryList, ElementRef} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {MATERIAL_DIRECTIVES, MdTabs} from "ng2-material/all";
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {RouteParams, RouterLink} from 'angular2/router';
 import {FORM_DIRECTIVES} from "angular2/common";
@@ -10,18 +10,23 @@ import {Logger, BaseCrud, UserDto, UrlService} from '../../engine/all';
 @Component({
   selector: 'login',
   templateUrl: 'components/login/login.html',
-  providers: [],
+  providers: [QueryList, ElementRef, MdTabs],
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent extends BaseCrud {
 
   urlService:UrlService;
   user:UserDto;
+  active = 0;
 
-  constructor(@Inject(RouteParams) routeParams, private http:Http, private translate: TranslateService) {
+  constructor(@Inject(RouteParams) routeParams, private http:Http, private translate: TranslateService, private tabs:MdTabs) {
     super(translate);
     this.urlService = new UrlService(http, "/");
     this.user = new UserDto();
+  }
+
+  ngOnInit() {
+    console.log(this.tabs);
   }
 
   login() {
@@ -37,7 +42,7 @@ export class LoginComponent extends BaseCrud {
   }
 
   createAccount() {
-    console.log(this.user.username, this.user.password, this.user.passwordConfirm, this.user.email, this.user.emailConfirm)
+    this.active = 2;
     if (this.fieldRequire(this.user.username, this.user.password, this.user.passwordConfirm, this.user.email, this.user.emailConfirm)) {
       this.error = "Migging field(s)";
       return;
@@ -56,7 +61,7 @@ export class LoginComponent extends BaseCrud {
     newUser.email = this.user.email;
     this.urlService.postUrlBase("/user/createAccount", newUser).subscribe((data) => {
       this.hasError(data).subscribe((data) => {
-        this.info = "User created"
+        window.location.hash = "#/login";
       });
     }, (error) => { this.info = ""; this.error = error; });
   }

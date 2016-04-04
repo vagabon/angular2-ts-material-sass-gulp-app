@@ -7,7 +7,7 @@ import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 
-import {BaseApp, SearchBarDirective, InfoDirective, AlertDirective, ConfirmDirective, ImagePipe, UrlService, RoleDirective, OwnerDirective} from './engine/all';
+import {BaseApp, SearchBarDirective, InfoDirective, AlertDirective, ConfirmDirective, ImagePipe, UrlService, RoleDirective, OwnerDirective, UserDto} from './engine/all';
 import {Settings} from './settings';
 
 import {HomeCmp} from './components/home/home';
@@ -31,6 +31,7 @@ import {UsersCmp} from './components/users/users';
 ])
 export class AppCmp extends BaseApp {
 
+  loading = false;
   urlService:UrlService;
   url;
   username;
@@ -41,6 +42,11 @@ export class AppCmp extends BaseApp {
     super(translate);
     this.urlService = new UrlService(http, "");
     this.username = 'anonymous';
+    this.urlService.getTokenStorage();
+    this.urlService.login(new UserDto('', ''), true, true).subscribe((data) => this.loading = true);
+  }
+
+  ngOnInit() {
   }
 
   ngDoCheck() {
@@ -66,8 +72,8 @@ export class AppCmp extends BaseApp {
   logout() {
     Settings.TOKEN = '';
     Settings.USER = { id: 0, 'username': '', 'role': '' };
-    localStorage.setItem("USER", null);
-    localStorage.setItem("TOKEN", null);
+    localStorage.removeItem("USER");
+    localStorage.removeItem("TOKEN");
     Settings.USER.username= 'anonymous';
     window.location.hash = "#/login";
   }

@@ -23,11 +23,21 @@ export class UrlService {
   constructor(public http:Http, public path = "") {
   }
 
+  showHtmlError(error = '') {
+    if (document.getElementById("errorMessage")) {
+      if (error != null && error != undefined && error != '') {
+        document.getElementById("errorContent").style.display = "block";
+        document.getElementById("errorMessage").innerHTML = error;
+      } else {
+        document.getElementById("errorContent").style.display = "none";
+      }
+    }
+  }
+
   resolve(data, observer) {
     Logger.log(data);
     if (data.status == 500) {
-      document.getElementById("errorContent").style.display = "block";
-      document.getElementById("errorMessage").innerHTML = data.stacktrace;
+      this.showHtmlError(data.stacktrace);
     }
     observer.next(data);
     observer.complete();
@@ -35,14 +45,13 @@ export class UrlService {
 
   handleError(error, observer) {
     console.error(error);
-    document.getElementById("errorContent").style.display = "block";
+    this.showHtmlError(error.status);
     var errorText = error || 'Server error';
-    window.document.getElementById("errorMessage").innerText = error.status;
     if (error.status == 401) {
       Settings.TOKEN = '';
       Settings.USER = { id: 0, 'username': '', 'role': '' };
-      localStorage.setItem("USER", null);
-      localStorage.setItem("TOKEN", null);
+      localStorage.removeItem("USER");
+      localStorage.removeItem("TOKEN");
     }
     observer.error(errorText);
     observer.complete();
@@ -72,7 +81,7 @@ export class UrlService {
   }
 
   launchUrlObserver(url, json, type, observer) {
-    document.getElementById("errorContent").style.display = "none";
+    this.showHtmlError();
     if (type == "GET") {
       this.lauthGetUrlObserver(url, observer);
     }
@@ -83,7 +92,7 @@ export class UrlService {
   }
 
   login(user:UserDto, encrypte = false, reload = false) {
-    document.getElementById("errorContent").style.display = "none";
+    this.showHtmlError();
     return Observable.create(observer => {
       Logger.log(URL + "/login" + (reload ? "?reload=true" : ""));
       this.http.post(URL + "/login" + (reload ? "?reload=true" : ""), JSON.stringify(new UserDto(user.username, encrypte ? btoa(user.password) : user.password)), {headers: this.getHeaders(true)})
@@ -101,12 +110,16 @@ export class UrlService {
     });
   }
 
+  getTokenStorage() {
+    if (localStorage.getItem("TOKEN") != '') {
+      Settings.TOKEN = localStorage.getItem("TOKEN");
+    }
+  }
+
   launchUrl(url, json, type) {
-    document.getElementById("errorContent").style.display = "none";
+    this.showHtmlError();
     if (Settings.TOKEN == '' && Settings.TOKEN != null) {
-      if (localStorage.getItem("TOKEN") != '') {
-        Settings.TOKEN = localStorage.getItem("TOKEN");
-      }
+      this.getTokenStorage();
       return Observable.create(observer => {
         this.login(new UserDto(Settings.USERNAME, Settings.PASSWORD), false, true).subscribe((data) => {
           this.launchUrlObserver(url, json, type, observer);
@@ -159,7 +172,7 @@ export class UrlService {
   }
 
   upload(file: File) {
-    document.getElementById("errorContent").style.display = "none";
+    this.showHtmlError();
     Logger.log("POST", URL + this.path + UPLOAD + "?token=" + Settings.TOKEN);
     return Observable.create(observer => {
       var formData:any = new FormData();

@@ -1,6 +1,6 @@
 <md-content class="md-padding widthFull" layout="row" layout-wrap layout-align="center start">
     <md-card *ngIf="userConnect.username=='' || userConnect.username=='anonymous'">
-        <md-tabs md-dynamic-height md-border-bottom>
+        <md-tabs md-autoselect md-dynamic-height md-border-bottom (selected)="selectedIndex">
             <template md-tab label="{{ 'LOGIN.CONNECT' | translate }}">
                 <md-content class="md-padding">
                     <div style="width: 50%; margin-left: 25%;">
